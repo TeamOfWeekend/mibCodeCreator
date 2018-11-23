@@ -17,8 +17,6 @@ from elements.mainWindow import My_MainWindow
 
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)  #所有的PyQt5应用必须创建一个应用（Application）对象
+    app = QApplication(sys.argv)  # 所有的PyQt5应用必须创建一个应用（Application）对象
     window = My_MainWindow()
     sys.exit(app.exec())
-	
-	

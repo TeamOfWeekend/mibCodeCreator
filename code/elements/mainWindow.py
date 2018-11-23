@@ -9,10 +9,8 @@
 @Software: PyCharm Community Edition
 """
 
-from PyQt5.QtWidgets import (QWidget, QHBoxLayout, QFrame,
-    QSplitter, QStyleFactory, QApplication, QMainWindow, QAction, qApp, QMenu)
+from PyQt5.QtWidgets import (QMainWindow, qApp, QMenu, QDesktopWidget, QMessageBox)
 from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import Qt
 from . import menu, statusBar, toolBar, mainWidget
 
 
@@ -51,9 +49,21 @@ class My_MainWindow(QMainWindow):
         :return:
         """
         self.setCentralWidget(mainWidget.My_MainWidget())
-        self.setGeometry(300, 300, 600, 400)
+        self.setGeometry(300, 300, 800, 600)
+        self.setWindowIcon(QIcon('images/beauty.jpg'))  # 设置窗体标题图标
         self.setWindowTitle('Mib代码生成器')
+        self.center()
         self.show()
+
+    def center(self):
+        """
+        居中显示窗口
+        :return:
+        """
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
 
     def toggleMenu(self, state):
         if state:
@@ -63,14 +73,14 @@ class My_MainWindow(QMainWindow):
             print('hide')
             # self.statusbar.hide() # 问题待确认
 
-    def contextMenuEvent(self, event):
-        cmenu = QMenu(self)
-        newAct = cmenu.addAction("New")
-        opnAct = cmenu.addAction("Open")
-        quitAct = cmenu.addAction("Quit")
-        action = cmenu.exec_(self.mapToGlobal(event.pos()))
-        if action == quitAct:
-            qApp.quit()
+    def closeEvent(self, event):
+        reply = QMessageBox.question(self, 'Message', "Are you sure to quit?",
+                                     QMessageBox.Yes | QMessageBox.No,
+                                     QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
 
 
 # app = QApplication(sys.argv)

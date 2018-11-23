@@ -9,11 +9,7 @@
 @Software: PyCharm Community Edition
 """
 
-import sys
-from PyQt5.QtWidgets import (QWidget, QHBoxLayout, QFrame,
-    QSplitter, QStyleFactory, QApplication, QMainWindow, QAction, qApp, QMenu)
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import (QAction, qApp, QMenu)
 
 
 class My_Menu():
